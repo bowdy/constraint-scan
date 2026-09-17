@@ -14,4 +14,24 @@ Plain language, second person, direct and warm, no hype, no lecturing. Main body
 
 Footer, one line, machine-readable: `CONSTRAINT-KEY: <kebab-case-slug> | CONFIDENCE: <0 to 1> | DATE: <YYYY-MM-DD>`. Keep the slug stable from day to day while the constraint is the same; the next run reads it.
 
+Then the state block, which is what makes delta days possible. At most 25 lines, no secrets, no email addresses other than the owner's, no personal details beyond names. It goes in both the plain-text body and, in a small grey monospace block, at the end of the HTML.
+
+```
+STATE-BEGIN
+mode: full | delta
+day: <N, days this slug has held>
+last-full: <YYYY-MM-DD>
+escalate: none | full
+goal: <one line, quoted from the owner>
+constraint: <slug> | <one sentence>
+hypotheses: H1 <slug> <survived|refuted|untested>; H2 ...; up to four
+action: <today's one action, one line> | done-yesterday: yes | no | partly
+open-items: <deadline YYYY-MM-DD> <item> <source>; ... at most ten
+signals: <signal> => <query or check>; ... three to five
+cursors: gmail=<ISO datetime> drive=<ISO datetime> git=<sha or none>
+STATE-END
+```
+
+On delta days the report is shorter: section 1 may be one paragraph, sections 2 and 7 may be a single line ("Unchanged since Monday's full scan"), and section 6 becomes "What changed in the last 24 hours" (action done or not, signals fired or not, items resolved or added). Signals should be phrased so tomorrow's delta agent can check each with one search or one glance.
+
 The email carries both an HTML body (self-contained, inline CSS only, max-width 640px, system font stack, 16px, generous line height, a light grey box around "Today's one action", no images, no external assets) and the markdown as the plain-text body. Both must be complete; a placeholder in either is what the reader sees.

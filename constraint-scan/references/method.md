@@ -46,6 +46,16 @@ Each refuter gets one hypothesis, the list of the other candidates for context, 
 
 Return: `hypothesis_id`, `refuted`, `confidence`, `reasoning`, `symptom_of` (if any), `evidence_problems` (if any).
 
+## Delta scan
+
+Most mornings nothing that moves the constraint has happened, and a full rescan is paying to rediscover yesterday. The delta scan reads only what is newer than the cursors in the previous state, with hard caps, and asks one question: did anything material happen?
+
+Brief for the delta agent: "Read only (1) mail newer than 1 day excluding promotions, social and digest senders, plus sent mail newer than 1 day, search results only, opening at most five threads that touch the constraint, an open item, a signal, or a real person the owner must answer; (2) notes to self newer than 1 day; (3) Drive files modified in the last 24 hours, reading at most three that touch the constraint or a signal, and quoting any change to the goal if the running-thoughts document changed; (4) the calendar for yesterday and the next 7 days in one call; (5) commits since the git cursor, subjects only. Return dated observations; each signal marked fired or not, with evidence; whether yesterday's action shows evidence of being done; items resolved and new items with deadlines; the new cursors; and whether the constraint plausibly moved, with the reason."
+
+Material means at least one of: a signal fired; yesterday's action relieved the constraint; a decision was written down (price, offer, direction); money came in or a payment path went live; a deadline passed; the goal changed. One more newsletter, meeting or inbound email is not material.
+
+Not material: write the report from the state plus the delta, keep the slug, increment the day count. Material: one judge-and-refuter agent decides whether the constraint moved, refuting the move first (symptom of the existing constraint? would relieving the new candidate raise throughput within 30 days? does the evidence hold?). Re-baseline with a full scan weekly regardless, because an incremental world model drifts, and sooner if two material days in a row end with confidence under 0.5.
+
 ## Choosing
 
 Prefer survivors. Among survivors prefer the most upstream one the refuters' reasoning supports. When nothing survives, read the refutations as votes: the hypothesis the others are called symptoms of is usually the root. Confidence is a number the reader can use, so make it honest: 0.8 when the evidence is direct and recent, 0.6 when it rests on inference from absence, lower when a key source was unreachable.

@@ -26,6 +26,19 @@ Copy this file to `constraint-scan.config.md` in your project (or to `~/.claude/
 - Repositories: owner/repo, owner/other-repo
 - Sources that are known to be unreachable from the sandbox (so the report says so rather than guessing): the community platform's member count, the live website
 
+## Models and cadence
+
+- Re-baseline day (full scan): Monday. Every other day is a delta scan unless the state is missing or says `escalate: full`.
+- Models per stage (Agent tool takes `model`; the Workflow tool also takes `effort`):
+  - delta scan: sonnet, medium
+  - sweeps: sonnet, medium
+  - judges: opus, high
+  - refuters: opus, high
+  - synthesis: the orchestrating session (or opus, max in the Workflow script)
+  - critic (Workflow script only): sonnet, high
+- Judge lenses on full days: 2 (strict Goldratt; first paid pound). Set to 4 for the deeper panel.
+- Caps: 5 threads opened in full on a delta day; 10 per sweep agent on a full day; 3 Drive documents on a delta day, 5 per sweep on a full day.
+
 ## Reports
 
 - Subject prefix: Morning constraint report

@@ -19,4 +19,6 @@ Fire the routine (or run the skill) with the extra message `TEST MODE`. The scan
 
 ## Capacity
 
-Remote environments often allow only two sub-agents at once. The pipeline is sized for that (six sweeps, four judges, up to eight refuters, one synthesis, one critic). Usage limits can interrupt a run; the Workflow-tool script in `scripts/` resumes from cache so the sweep does not have to be paid for twice.
+Remote environments often allow only two sub-agents at once. The full pipeline is sized for that (six sweeps, two judges, up to four refuters, synthesis), and delta days use one or two sub-agents. Usage limits can interrupt a run; the Workflow-tool script in `scripts/` resumes from cache so the sweep does not have to be paid for twice.
+
+Cost: the first deployment's full scan, every agent on the top model at maximum effort, used about 4.6 million tokens. With the per-stage models in the config and delta mode six days out of seven, the daily average is roughly a tenth of that. A routine bound to an existing session re-reads that session's history on every turn, so a fresh-session routine created from the Routines page is cheaper still when the account allows connector grants on it.
