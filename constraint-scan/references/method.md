@@ -54,7 +54,7 @@ Brief for the delta agent: "Read only (1) mail newer than 1 day excluding promot
 
 Material means at least one of: a signal fired; yesterday's action relieved the constraint; a decision was written down (price, offer, direction); money came in or a payment path went live; a deadline passed; the goal changed. One more newsletter, meeting or inbound email is not material.
 
-Not material: write the report from the state plus the delta, keep the slug, increment the day count. Material: one judge-and-refuter agent decides whether the constraint moved, refuting the move first (symptom of the existing constraint? would relieving the new candidate raise throughput within 30 days? does the evidence hold?). Re-baseline with a full scan weekly regardless, because an incremental world model drifts, and sooner if two material days in a row end with confidence under 0.5.
+Not material: write the report from the state plus the delta, keep the slug, increment the day count. Material: decide whether the constraint moved, refuting the move first (symptom of the existing constraint? would relieving the new candidate raise throughput within 30 days? does the evidence hold?). In budget mode the delta agent does this itself in the same pass and caps confidence at 0.5 on a move; otherwise one judge-and-refuter agent does it. An incremental world model drifts, so either re-baseline with a full scan on a fixed weekday, or, in budget mode, tell the owner in the report how to ask for one and keep the signals sharp enough that drift shows up as a fired signal.
 
 ## Choosing
 

@@ -28,7 +28,10 @@ Copy this file to `constraint-scan.config.md` in your project (or to `~/.claude/
 
 ## Models and cadence
 
-- Re-baseline day (full scan): Monday. Every other day is a delta scan unless the state is missing or says `escalate: full`.
+- Re-baseline (full scan): `never` for budget mode (delta every day, full scan only when asked), or a weekday such as `Monday`.
+- Escalation on a material delta day: `none` (the delta agent judges the move itself, confidence capped at 0.5) or `opus judge`.
+- Sender: `delta agent` (cheapest: the one agent scans, writes and sends) or `orchestrator`.
+- Delta tool-call cap: 12 (30 when bootstrapping with no previous report).
 - Models per stage (Agent tool takes `model`; the Workflow tool also takes `effort`):
   - delta scan: sonnet, medium
   - sweeps: sonnet, medium
@@ -37,7 +40,7 @@ Copy this file to `constraint-scan.config.md` in your project (or to `~/.claude/
   - synthesis: the orchestrating session (or opus, max in the Workflow script)
   - critic (Workflow script only): sonnet, high
 - Judge lenses on full days: 2 (strict Goldratt; first paid pound). Set to 4 for the deeper panel.
-- Caps: 5 threads opened in full on a delta day; 10 per sweep agent on a full day; 3 Drive documents on a delta day, 5 per sweep on a full day.
+- Caps: 3 threads and 2 Drive documents opened in full on a delta day; 10 threads and 5 documents per sweep agent on a full day.
 
 ## Reports
 
